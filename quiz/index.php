@@ -148,10 +148,10 @@
 
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nama = htmlspecialchars($_POST['nama']);
-            $nim = htmlspecialchars($_POST['nim']);
-            $kelas = htmlspecialchars($_POST['kelas']);
-            $jenis_kelamin = htmlspecialchars($_POST['jenis_kelamin']);
+            $nama = $_POST['nama'];
+            $nim = $_POST['nim'];
+            $kelas = $_POST['kelas'];
+            $jenis_kelamin = $_POST['jenis_kelamin'];
 
             echo "<div class='result'>";
             echo "<h2>Hasil Input:</h2>";
