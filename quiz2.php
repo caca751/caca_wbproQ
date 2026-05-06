@@ -1,9 +1,18 @@
+<?php
+$kode = $nama = $jumlah = $harga = "";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $kode = $_POST["kode"] ?? "";
+    $nama = $_POST["nama"] ?? "";
+    $jumlah = $_POST["jumlah"] ?? "";
+    $harga = $_POST["harga"] ?? "";
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Input Mahasiswa</title>
+    <title>Form Input Barang</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,7 +56,8 @@
             color: #4f5d72;
             font-weight: 700;
         }
-        input[type="text"] {
+        input[type="text"],
+        input[type="number"] {
             width: 100%;
             padding: 14px;
             border: 1px solid #c3d5f3;
@@ -55,35 +65,6 @@
             font-size: 16px;
             background-color: #fff0f7;
             color: #2f3c4f;
-        }
-        .gender {
-            width: 100%;
-            margin-bottom: 0;
-        }
-        .gender-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px;
-            align-items: center;
-            margin-top: 8px;
-        }
-        .gender-options label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 14px;
-            border: 1px solid #ffc0d6;
-            border-radius: 10px;
-            background-color: #ffe8f2;
-            color: #4f5d72;
-            font-size: 15px;
-            cursor: pointer;
-        }
-        input[type="radio"] {
-            width: 18px;
-            height: 18px;
-            accent-color: #d43f7f;
-            cursor: pointer;
         }
         input[type="submit"] {
             width: 100%;
@@ -118,50 +99,40 @@
 </head>
 <body>
     <div class="container">
-        <h1>Form Input Mahasiswa</h1>
+        <h1>Form Input Barang</h1>
         <form action="" method="post">
             <div class="form-group">
-                <label for="nama">Nama:</label>
-                <input type="text" id="nama" name="nama" required>
+                <label for="kode">Kode Barang:</label>
+                <input type="text" id="kode" name="kode" value="<?= $kode ?>" required>
             </div>
 
             <div class="form-group">
-                <label for="nim">NIM:</label>
-                <input type="text" id="nim" name="nim" required>
+                <label for="nama">Nama Barang:</label>
+                <input type="text" id="nama" name="nama" value="<?= $nama ?>" required>
             </div>
 
             <div class="form-group">
-                <label for="kelas">Kelas:</label>
-                <input type="text" id="kelas" name="kelas" required>
+                <label for="jumlah">Jumlah:</label>
+                <input type="number" id="jumlah" name="jumlah" min="0" value="<?= $jumlah ?>" required>
             </div>
 
-            <div class="form-group gender">
-                <label>Jenis Kelamin:</label>
-                <div class="gender-options">
-                    <label><input type="radio" name="jenis_kelamin" value="Laki-laki" required> Laki-laki</label>
-                    <label><input type="radio" name="jenis_kelamin" value="Perempuan" required> Perempuan</label>
-                </div>
+            <div class="form-group">
+                <label for="harga">Harga:</label>
+                <input type="number" id="harga" name="harga" min="0" step="0.01" value="<?= $harga ?>" required>
             </div>
 
             <input type="submit" value="Submit">
         </form>
 
-        <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nama = $_POST['nama'];
-            $nim = $_POST['nim'];
-            $kelas = $_POST['kelas'];
-            $jenis_kelamin = $_POST['jenis_kelamin'];
-
-            echo "<div class='result'>";
-            echo "<h2>Hasil Input:</h2>";
-            echo "<p><strong>Nama:</strong> $nama</p>";
-            echo "<p><strong>NIM:</strong> $nim</p>";
-            echo "<p><strong>Kelas:</strong> $kelas</p>";
-            echo "<p><strong>Jenis Kelamin:</strong> $jenis_kelamin</p>";
-            echo "</div>";
-        }
-        ?>
+        <?php if ($_SERVER["REQUEST_METHOD"] === "POST"): ?>
+            <div class="result">
+                <h2>Hasil Input:</h2>
+                <p><strong>Kode Barang:</strong> <?= $kode ?></p>
+                <p><strong>Nama Barang:</strong> <?= $nama ?></p>
+                <p><strong>Jumlah:</strong> <?= $jumlah ?></p>
+                <p><strong>Harga:</strong> <?= $harga ?></p>
+            </div>
+        <?php endif; ?>
     </div>
 </body>
 </html>
